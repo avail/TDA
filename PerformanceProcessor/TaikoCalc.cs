@@ -40,7 +40,11 @@ namespace PerformanceProcessor
 
         public double GetSR()
         {
-            return starcalc.GetStars();
+            Console.Write("Stars?: ");
+            var stars = Console.ReadLine();
+            Console.WriteLine();
+
+            return Convert.ToDouble(stars);
         }
 
         public double Accuracy()
