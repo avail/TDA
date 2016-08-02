@@ -11,23 +11,30 @@ public class Program
         if(args.Length == 0)
         {
             Console.WriteLine("Taiko Difficulty Analyzer");
-            Console.WriteLine("\nUsage: TDA \"map.osu\" [OPTIONS]");
-            Console.WriteLine("\nOPTIONS:");
-            Console.WriteLine("  -a 100s \t The number of 100s scored, default 0");
-            Console.WriteLine("  -m misses \t The number of misses, default 0");
-            Console.WriteLine("  -c maxcombo \t Max combo achieved, default TotalNotes-misses");
-            Console.WriteLine("  -M mods \t Mods used during the play, default none");
-            Console.WriteLine("\t\t Valid mod IDs are nf, ez, hd, hr, dt, ht, nc, fl");
-            Console.WriteLine("\t\t Mods may appear in any order, case-insensitive, with no spaces");
-            Console.WriteLine("\t\t Ex: hdhrdt");
-            Console.WriteLine("\nOptions may appear in any order");
+            Console.WriteLine("\nUsage: TDA \"map.osu\" ");
         }
         //Otherwise try to run the program, and catch and display any exceptions that arise
         else
         {
             try
             {
-                PPCalc calculator = new PPCalc(args);
+                Console.Write("Number of 100s scored: ");
+                var hundreds = Console.ReadLine();
+                Console.WriteLine();
+
+                Console.Write("Number of misses: ");
+                var misses = Console.ReadLine();
+                Console.WriteLine();
+
+                Console.Write("Max combo (default TotalNotes - misses): ");
+                var maxcombo = Console.ReadLine();
+                Console.WriteLine();
+
+                Console.Write("Mods (e.g. hdhrdt, any order): ");
+                var mods = Console.ReadLine();
+                Console.WriteLine();
+
+                PPCalc calculator = new PPCalc(args[0], hundreds, misses, maxcombo, mods);
                 calculator.PrintStats();
             }
             catch(Exception e)

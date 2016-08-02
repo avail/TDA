@@ -10,38 +10,38 @@ public class PPCalc
     private TaikoCalc processor;
     private Beatmap map;
 
-    public PPCalc(string[] args)
+    public PPCalc(string osufile, string hundreds, string misses, string _maxcombo, string mods)
     {
         //Format the command line arguments into a string array
         //array order is {filepath, amount100, amountmiss, maxcombo, mods}
-        string[] rawargs = ProcessArguments(args);
+        //string[] rawargs = ProcessArguments(args);
 
-        map = new Beatmap(rawargs[0]);
+        map = new Beatmap(osufile);
 
         int amount300, amount100, amountmiss, maxcombo;
         string modlist;
         int totalobjects = GetNoteCount();
 
         //Put the arguments into the correct-type variables
-        if(rawargs[1] == "")
+        if(hundreds == "")
             amount100 = 0;
         else
-            amount100 = Convert.ToInt32(rawargs[1]);
+            amount100 = Convert.ToInt32(hundreds);
 
-        if(rawargs[2] == "")
+        if(misses == "")
             amountmiss = 0;
         else
-            amountmiss = Convert.ToInt32(rawargs[2]);
+            amountmiss = Convert.ToInt32(misses);
 
-        if(rawargs[3] == "")
+        if(_maxcombo == "")
             maxcombo = totalobjects - amountmiss;
         else
-            maxcombo = Convert.ToInt32(rawargs[3]);
+            maxcombo = Convert.ToInt32(_maxcombo);
 
-        if(rawargs[4] == "")
+        if(mods == "")
             modlist = "";
         else
-            modlist = rawargs[4];
+            modlist = mods;
 
         //Infer the number of 300s from the amount of 100s and misses
         amount300 = totalobjects - amount100 - amountmiss;
